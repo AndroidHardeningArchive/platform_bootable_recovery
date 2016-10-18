@@ -34,7 +34,6 @@ static const char* MENU_ITEMS[] = {
     "Reboot to bootloader",
     "Apply update from ADB",
     "View recovery logs",
-    "Run graphics test",
     "Power off",
     NULL
 };
@@ -66,8 +65,7 @@ Device::BuiltinAction Device::InvokeMenuItem(int menu_position) {
     case 1: return REBOOT_BOOTLOADER;
     case 2: return APPLY_ADB_SIDELOAD;
     case 3: return VIEW_RECOVERY_LOGS;
-    case 4: return RUN_GRAPHICS_TEST;
-    case 5: return SHUTDOWN;
+    case 4: return SHUTDOWN;
     default: return NO_ACTION;
   }
 }
