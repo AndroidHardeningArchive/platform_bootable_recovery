@@ -16,6 +16,7 @@
 
 #include "device.h"
 
+#ifdef DEBUG_BUILD
 static const char* MENU_ITEMS[] = {
     "Reboot system now",
     "Reboot to bootloader",
@@ -28,11 +29,24 @@ static const char* MENU_ITEMS[] = {
     "Power off",
     NULL
 };
+#else
+static const char* MENU_ITEMS[] = {
+    "Reboot system now",
+    "Reboot to bootloader",
+    "Apply update from ADB",
+    "Mount /system",
+    "View recovery logs",
+    "Run graphics test",
+    "Power off",
+    NULL
+};
+#endif
 
 const char* const* Device::GetMenuItems() {
   return MENU_ITEMS;
 }
 
+#ifdef DEBUG_BUILD
 Device::BuiltinAction Device::InvokeMenuItem(int menu_position) {
   switch (menu_position) {
     case 0: return REBOOT;
@@ -47,6 +61,20 @@ Device::BuiltinAction Device::InvokeMenuItem(int menu_position) {
     default: return NO_ACTION;
   }
 }
+#else
+Device::BuiltinAction Device::InvokeMenuItem(int menu_position) {
+  switch (menu_position) {
+    case 0: return REBOOT;
+    case 1: return REBOOT_BOOTLOADER;
+    case 2: return APPLY_ADB_SIDELOAD;
+    case 3: return MOUNT_SYSTEM;
+    case 4: return VIEW_RECOVERY_LOGS;
+    case 5: return RUN_GRAPHICS_TEST;
+    case 6: return SHUTDOWN;
+    default: return NO_ACTION;
+  }
+}
+#endif
 
 int Device::HandleMenuKey(int key, int visible) {
   if (!visible) {
