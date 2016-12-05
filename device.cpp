@@ -27,8 +27,8 @@ static const char* MENU_ITEMS[] = {
 #endif  // !AB_OTA_UPDATER
     "Mount /system",
     "View recovery logs",
-#endif
     "Run graphics test",
+#endif
     "Power off",
     NULL,
 };
@@ -44,8 +44,8 @@ static const Device::BuiltinAction MENU_ACTIONS[] = {
 #endif  // !AB_OTA_UPDATER
     Device::MOUNT_SYSTEM,
     Device::VIEW_RECOVERY_LOGS,
-#endif
     Device::RUN_GRAPHICS_TEST,
+#endif
     Device::SHUTDOWN,
 };
 
