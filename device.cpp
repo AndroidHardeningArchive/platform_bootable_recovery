@@ -25,8 +25,8 @@ static const char* MENU_ITEMS[] = {
 #ifndef AB_OTA_UPDATER
     "Wipe cache partition",
 #endif  // !AB_OTA_UPDATER
-#endif
     "Mount /system",
+#endif
     "View recovery logs",
     "Run graphics test",
     "Power off",
@@ -42,8 +42,8 @@ static const Device::BuiltinAction MENU_ACTIONS[] = {
 #ifndef AB_OTA_UPDATER
     Device::WIPE_CACHE,
 #endif  // !AB_OTA_UPDATER
-#endif
     Device::MOUNT_SYSTEM,
+#endif
     Device::VIEW_RECOVERY_LOGS,
     Device::RUN_GRAPHICS_TEST,
     Device::SHUTDOWN,
