@@ -64,18 +64,14 @@ static const float DEFAULT_FILES_PROGRESS_FRACTION = 0.4;
 static const float DEFAULT_IMAGE_PROGRESS_FRACTION = 0.1;
 
 // This function parses and returns the build.version.incremental
-static int parse_build_number(std::string str) {
+static std::string parse_build_number(std::string str) {
     size_t pos = str.find("=");
     if (pos != std::string::npos) {
-        std::string num_string = android::base::Trim(str.substr(pos+1));
-        int build_number;
-        if (android::base::ParseInt(num_string.c_str(), &build_number, 0)) {
-            return build_number;
-        }
+        return android::base::Trim(str.substr(pos+1));
     }
 
     LOGE("Failed to parse build number in %s.\n", str.c_str());
-    return -1;
+    return "";
 }
 
 bool read_metadata_from_package(ZipArchive* zip, std::string* meta_data) {
@@ -106,16 +102,14 @@ static void read_source_target_build(ZipArchive* zip, std::vector<std::string>& 
     for (const std::string& line : lines) {
         std::string str = android::base::Trim(line);
         if (android::base::StartsWith(str, "pre-build-incremental")){
-            int source_build = parse_build_number(str);
-            if (source_build != -1) {
-                log_buffer.push_back(android::base::StringPrintf("source_build: %d",
-                        source_build));
+            std::string source_build = parse_build_number(str);
+            if (!source_build.empty()) {
+                log_buffer.push_back("source_build: " + source_build);
             }
         } else if (android::base::StartsWith(str, "post-build-incremental")) {
-            int target_build = parse_build_number(str);
-            if (target_build != -1) {
-                log_buffer.push_back(android::base::StringPrintf("target_build: %d",
-                        target_build));
+            std::string target_build = parse_build_number(str);
+            if (!target_build.empty()) {
+                log_buffer.push_back("target_build: " + target_build);
             }
         }
     }
