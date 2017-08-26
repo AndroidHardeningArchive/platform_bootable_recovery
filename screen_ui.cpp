@@ -294,7 +294,7 @@ void ScreenRecoveryUI::draw_screen_locked() {
                     android::base::GetProperty("ro.bootimage.build.fingerprint", "");
 
             SetColor(INFO);
-            DrawTextLine(TEXT_INDENT, &y, "Android Recovery", true);
+            DrawTextLine(TEXT_INDENT, &y, "CopperheadOS Recovery", true);
             for (auto& chunk : android::base::Split(recovery_fingerprint, ":")) {
                 DrawTextLine(TEXT_INDENT, &y, chunk.c_str(), false);
             }
